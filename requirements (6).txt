@@ -1,4 +1,0 @@
-streamlit
-numpy
-# Pinning a specific version often resolves build/wheel issues for complex packages
-scipy==1.11.4
