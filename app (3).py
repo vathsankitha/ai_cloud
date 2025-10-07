@@ -2,7 +2,6 @@ import streamlit as st
 import os
 import tempfile
 import numpy as np
-import soundfile as sf
 import time
 import scipy.io.wavfile as wavfile
 import math
@@ -63,7 +62,7 @@ def generate_music(uploaded_file_path, mood_genre, status_placeholder):
     # Create a temporary file to save the generated audio
     with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmpfile:
         output_filename = tmpfile.name
-        sf.write(output_filename, audio_data, sample_rate) # Use soundfile to write
+        wavfile.write(output_filename, sample_rate, audio_data) # Use scipy.io.wavfile to write
 
     status_placeholder.text("Music generation complete!")
     return output_filename
@@ -111,8 +110,7 @@ if st.button("Remix/Generate Music"):
 
             except FileNotFoundError:
                  status_placeholder.error("Error: Temporary file could not be created or accessed.")
-            except sf.LibsndfileError as e:
-                status_placeholder.error(f"Error processing audio file: {e}. Please ensure the file is a valid audio format.")
+            # Removed soundfile specific error handling
             except Exception as e:
                 status_placeholder.error(f"An unexpected error occurred during music generation: {e}")
 
