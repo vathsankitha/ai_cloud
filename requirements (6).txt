@@ -1,6 +1,3 @@
 streamlit
 numpy
-soundfile
 scipy
-pygame
-
